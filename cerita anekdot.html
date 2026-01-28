@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Jam Sholat Harian</title>
+<style>
+body{
+  background:#0a2a43;
+  color:white;
+  text-align:center;
+  font-family:Arial;
+}
+
+#jam{
+  font-size:50px;
+  margin-top:20px;
+}
+
+#hari{
+  font-size:25px;
+  margin-bottom:20px;
+}
+
+table{
+  margin:auto;
+  border-collapse:collapse;
+  width:60%;
+  background:#0e3fe2;
+  font-size:22px;
+}
+
+th, td{
+  border:2px solid white;
+  padding:12px;
+}
+
+th{
+  background:#22ff1e;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🕌 Jam Sholat Digital</h1>
+<div id="jam"></div>
+<div id="hari"></div>
+
+<table>
+<tr>
+<th>Sholat</th>
+<th>Waktu</th>
+</tr>
+<tr><td>Subuh</td><td id="subuh"></td></tr>
+<tr><td>Dzuhur</td><td id="dzuhur"></td></tr>
+<tr><td>Ashar</td><td id="ashar"></td></tr>
+<tr><td>Maghrib</td><td id="maghrib"></td></tr>
+<tr><td>Isya</td><td id="isya"></td></tr>
+</table>
+
+<script>
+let jadwal = {
+  subuh:"04.20",
+  dzuhur:"11.52",
+  ashar:"15.19",
+  maghrib:"18.01",
+  isya:"19.16"
+};
+
+document.getElementById("subuh").innerHTML = jadwal.subuh;
+document.getElementById("dzuhur").innerHTML = jadwal.dzuhur;
+document.getElementById("ashar").innerHTML = jadwal.ashar;
+document.getElementById("maghrib").innerHTML = jadwal.maghrib;
+document.getElementById("isya").innerHTML = jadwal.isya;
+
+function updateJam(){
+  let now = new Date();
+
+  let jam = now.getHours().toString().padStart(2,"0");
+  let menit = now.getMinutes().toString().padStart(2,"0");
+  let detik = now.getSeconds().toString().padStart(2,"0");
+
+  document.getElementById("jam").innerHTML = jam + ":" + menit + ":" + detik;
+
+  let hari = ["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"];
+  let bulan = ["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des"];
+
+  let teksHari = hari[now.getDay()] + ", " + 
+                 now.getDate() + " " + 
+                 bulan[now.getMonth()] + " " + 
+                 now.getFullYear();
+
+  document.getElementById("hari").innerHTML = teksHari;
+}
+
+setInterval(updateJam,1000);
+</script>
+
+</body>
+</html>
+
